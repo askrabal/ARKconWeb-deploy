@@ -1,0 +1,17 @@
+version: "3"
+services:
+  arkconweb:
+    build: ../arkcon
+    image: arkconweb:test
+    environment:
+      LGSM_PATH: ${LGSM_PATH-/home/arkserver}
+      ARK_USER: ${ARK_USER?Must specify}
+    ports:
+      - "8080:5000"
+    volumes:
+      - arkcon:/app/instance
+      - ${LGSM_PATH}:/home/arkserver:ro
+    user: ${ARK_USER}
+
+volumes:
+  arkcon:
